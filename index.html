@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shivardana - Turmeric Groundnuts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <style>
+    :root {
+      --primary: #ffcb05;
+      --accent: #d35400;
+      --bg: #fff9e6;
+      --bg2: #ffeaa7;
+      --white: #fff;
+      --shadow: 0 4px 16px rgba(0,0,0,0.08);
+      --nav-bg: #fffbe6;
+      --nav-pill: #ffeaa7;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(120deg, var(--bg), var(--bg2));
+      color: #333;
+      min-height: 100vh;
+      scroll-behavior: smooth;
+    }
+    header {
+      background: var(--nav-bg);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      padding: 0.7rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid var(--primary);
+      transition: background 0.3s;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: linear-gradient(90deg, var(--primary) 60%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: logoPulse 2s infinite alternate;
+    }
+    @keyframes logoPulse {
+      0% { filter: brightness(1); }
+      100% { filter: brightness(1.15); }
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      position: relative;
+    }
+    nav a {
+      text-decoration: none;
+      color: #222;
+      font-weight: 600;
+      font-size: 1.08rem;
+      padding: 0.5rem 1.2rem;
+      border-radius: 999px;
+      transition: background 0.25s, color 0.2s;
+      position: relative;
+      z-index: 1;
+    }
+    nav a:hover, nav a.active {
+      background: var(--nav-pill);
+      color: var(--accent);
+      box-shadow: 0 2px 8px rgba(211,84,0,0.07);
+    }
+    nav a.active {
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 4px 16px rgba(255,203,5,0.13);
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      margin-left: 1.5rem;
+    }
+    .hamburger span {
+      width: 28px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    @media (max-width: 900px) {
+      nav {
+        position: absolute;
+        top: 65px;
+        right: 2rem;
+        background: var(--nav-bg);
+        flex-direction: column;
+        gap: 0;
+        box-shadow: var(--shadow);
+        border-radius: 16px;
+        overflow: hidden;
+        min-width: 170px;
+        display: none;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: opacity 0.3s, transform 0.3s;
+      }
+      nav.open {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+        animation: navSlideDown 0.4s cubic-bezier(.68,-0.55,.27,1.55);
+      }
+      @keyframes navSlideDown {
+        0% { opacity: 0; transform: translateY(-30px);}
+        100% { opacity: 1; transform: translateY(0);}
+      }
+      nav a {
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid #ffeaa7;
+      }
+      .hamburger { display: flex; }
+    }
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem 2rem 2rem;
+      background: linear-gradient(120deg, #fffbe6 60%, #ffeaa7 100%);
+      animation: fadeIn 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.98);}
+      100% { opacity: 1; transform: scale(1);}
+    }
+    .hero img.logo-img {
+      width: 120px;
+      margin-bottom: 1.2rem;
+      animation: float 2.5s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% {transform: translateY(0);}
+      50% {transform: translateY(-12px);}
+      100% {transform: translateY(0);}
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      color: var(--accent);
+      background: linear-gradient(to right, #e67e22, #d35400);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      max-width: 650px;
+      margin: 0 auto 1.5rem auto;
+      color: #6d4c1b;
+    }
+    .product-image {
+      width: 320px;
+      margin: 2rem auto 0 auto;
+      display: block;
+      border-radius: 20px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.13);
+      transition: transform 0.3s;
+    }
+    .product-image:hover {
+      transform: scale(1.04) rotate(-2deg);
+    }
+    .section {
+      padding: 3rem 2rem 2rem 2rem;
+      text-align: center;
+      animation: fadeInUp 1s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    @keyframes fadeInUp {
+      0% {opacity: 0; transform: translateY(30px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+    .section h2 {
+      color: var(--accent);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .section p {
+      font-size: 1.1rem;
+      color: #5a3d13;
+      margin-bottom: 0.5rem;
+    }
+    .benefits ul {
+      list-style: none;
+      max-width: 800px;
+      margin: 2rem auto 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+    }
+    .benefits li {
+      background: #fffbe6;
+      padding: 1.2rem 1rem;
+      border-radius: 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+      font-size: 1.08rem;
+      font-weight: 500;
+      color: #7a4a00;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .benefits li:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 18px rgba(211,84,0,0.13);
+      background: #fff9e6;
+    }
+    .cta-btn {
+  background: linear-gradient(90deg, #ffcb05 0%, #d35400 100%);
+  color: #fff;
+  padding: 9px 36px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 16px rgba(211,84,0,0.13);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+}
+.cta-btn:hover, .cta-btn:focus {
+  background: linear-gradient(90deg, #d35400 0%, #ffcb05 100%);
+  color: #fff;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 8px 24px rgba(211,84,0,0.18);
+}
+    .cta {
+      background: var(--white);
+      color: #333;
+      padding: 2.2rem 2rem;
+      border: 1px solid #f39c12;
+      border-left: 6px solid #f39c12;
+      border-radius: 14px;
+      margin: 2.5rem auto 2rem auto;
+      max-width: 540px;
+      text-align: left;
+      box-shadow: var(--shadow);
+      animation: fadeInUp 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+      position: relative;
+    }
+    .cta h2 {
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      font-size: 1.5rem;
+    }
+    .cta p {
+      margin: 0.3rem 0;
+      font-size: 1.05rem;
+    }
+    .cta a.cta-btn {
+      background: var(--accent);
+      color: #fff;
+      padding: 12px 28px;
+      display: inline-block;
+      margin-top: 1.2rem;
+      border-radius: 7px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 8px rgba(211,84,0,0.09);
+      transition: background 0.3s, transform 0.2s;
+    }
+    .cta a.cta-btn:hover {
+      background: #b34700;
+      transform: scale(1.04);
+    }
+    .cta .contact-icons {
+      margin-top: 1.2rem;
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+    }
+    .cta .contact-icons a {
+      color: var(--accent);
+      font-size: 1.5rem;
+      transition: color 0.2s;
+    }
+    .cta .contact-icons a:hover {
+      color: #b34700;
+    }
+    footer {
+      text-align: center;
+      padding: 1.2rem 0 1rem 0;
+      background: #f4c542;
+      color: #222;
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+    }
+    @media (max-width: 900px) {
+      .hero h1 { font-size: 2.1rem; }
+      .hero img.logo-img { width: 90px; }
+      .product-image { width: 220px; }
+      .section h2 { font-size: 1.4rem; }
+      .cta { padding: 1.5rem 1rem; }
+    }
+    @media (max-width: 600px) {
+      .hero { padding: 2.5rem 0.5rem 1.5rem 0.5rem; }
+      .section { padding: 2rem 0.5rem 1rem 0.5rem; }
+      .cta { max-width: 98vw; }
+      .benefits ul { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="C:\Users\shwet\Downloads\shivar\images\WhatsApp_Image_2025-06-10_at_09.51.17-removebg-preview.png" alt="Shivardana Logo" style="width:36px;vertical-align:middle;filter:drop-shadow(0 2px 6px #ffeaa7);">
+      Shivardana
+    </div>
+    <nav id="nav">
+      <a href="#about">About</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="hamburger" id="hamburger" aria-label="Open menu" tabindex="0" role="button">
+      <span></span><span></span><span></span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <img src="C:\Users\shwet\Downloads\shivar\images\1749537875267-removebg-preview.png" alt="Shivardana Logo" class="logo-img" loading="lazy">
+    <h1>Turmeric-Coated Groundnuts</h1>
+    <p>Rooted in tradition, sun-dried &amp; packed with immunity-boosting turmeric and pure salt.<br>Available in <b>100g, 250g &amp; 500g</b> packs.</p>
+    <img src="C:\Users\shwet\Downloads\shivar\images\ChatGPT_Image_Jun_10__2025__11_34_01_AM-removebg-preview.png" class="product-image" loading="lazy">
+    <a href="#contact" class="cta-btn"><i class="fas fa-shopping-bag"></i> Order Now</a>
+  </section>
+
+  <section id="about" class="section">
+    <h2>What is Shivardana?</h2>
+    <p>A wholesome twist on your everyday peanuts. Soaked in turmeric &amp; rock salt, dried naturally—no oil, no chemicals.</p>
+  </section>
+
+  <section id="benefits" class="section benefits">
+    <h2>Why Shivardana?</h2>
+    <ul>
+      <li><span>🛡️</span> Boosts Immunity – Anti-inflammatory turmeric</li>
+      <li><span>🌿</span> Easy to Digest – Gut-friendly &amp; natural</li>
+      <li><span>🚫</span> No Oil, No Preservatives – Just purity</li>
+      <li><span>💪</span> Rich in Protein &amp; Fibre – A healthy snack, anytime</li>
+    </ul>
+  </section>
+
+  <section class="cta" id="contact">
+    <h2>Order Now</h2>
+    <p><strong>📦 Available for:</strong> Events, Gifting &amp; Retail</p>
+    <p><strong>🤝 Distributors Welcome</strong></p>
+    <p><strong>📞 Call / WhatsApp:</strong> <a href="tel:+918999935237">8999935237</a></p>
+    <p><strong>✉️ Email:</strong> <a href="mailto:patilchirag1106@gmail.com">patilchirag1106@gmail.com</a></p>
+    <a href="https://wa.me/918999935237" class="cta-btn" target="_blank" rel="noopener">📲 Message on WhatsApp</a>
+    <div class="contact-icons">
+      <a href="tel:+918999935237" title="Call"><i class="fas fa-phone"></i></a>
+      <a href="mailto:patilchirag1106@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://wa.me/918999935237" title="WhatsApp" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Shivardana. Crafted with <span aria-label="love" style="color:#d35400;">&#10084;&#65039;</span> in India.
+  </footer>
+  <script>
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    hamburger.addEventListener('click', () => {
+      nav.classList.toggle('open');
+    });
+    hamburger.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') nav.classList.toggle('open');
+    });
+    // Highlight nav on scroll
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('nav a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 90;
+        if (pageYOffset >= sectionTop) current = section.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(current)) link.classList.add('active');
+      });
+    });
+    // Close nav on link click (mobile)
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if(window.innerWidth < 900) nav.classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>
